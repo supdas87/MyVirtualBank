@@ -1,0 +1,42 @@
+package com.yash.college;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.TreeSet;
+
+public class BulletCounter {
+
+	public static void main(String[] args) {
+		int[] input = { 8,5,7,6,4,6,3,4 };
+		List<Integer> finalList = new ArrayList<Integer>();
+
+		List<Integer> inputList = new ArrayList<>();
+		for (int i = 0; i < input.length; i++) {
+			inputList.add(input[i]);
+		}
+		Collections.sort(inputList);
+
+		for (Integer val : inputList) {
+			if (finalList.isEmpty()) {
+				finalList.add(val);
+			} else {
+				int i = 0;
+				for (; i < finalList.size(); i++) {
+					if (finalList.get(i) < val) {
+						finalList.remove(i);
+						finalList.add(i, val);
+						break;
+					}
+				}
+				if (i == finalList.size()) {
+					finalList.add(val);
+				}
+			}
+		}
+
+		finalList.stream().reduce((x, y) -> x + y).ifPresent(System.out::println);
+
+	}
+
+}
